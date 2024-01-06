@@ -3,4 +3,7 @@ build:
 
 run-vm:
 	docker rm -f jenkins || true > /dev/null
-	docker run -itd --name jenkins --rm opstree/jenkins:1.0
+	docker run -itd --name jenkins -v ${PWD}:/src --rm opstree/jenkins:1.0
+
+connect-vm:
+	docker exec -it jenkins bash
