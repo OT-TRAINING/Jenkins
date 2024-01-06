@@ -45,3 +45,7 @@ findbug:
 code-coverage:
 	cd code ;\
 	mvn cobertura:cobertura
+
+
+help:
+	@make -qpRr | egrep -e '^[a-z].*:$$' | sed -e 's~:~~g' | sort
