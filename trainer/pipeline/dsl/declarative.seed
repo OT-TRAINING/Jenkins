@@ -86,5 +86,76 @@ folder('pipeline/declarative') {
                             }
                         }
                     }
+    pipelineJob('pipeline/declarative/05 Options') {
+                        definition {
+                            cps {
+                                script('''
+                                    pipeline {
+                                        agent any
+                                        options {
+                                            timeout(time: 10, unit: 'SECONDS') 
+                                            disableConcurrentBuilds()
+                                        }
+                                        stages {
+                                            stage('Hello') {
+                                                steps {
+                                                    echo 'Hello, world!'
+                                                    sh 'sleep 1m'
+                                                }
+                                            }
+                                        }
+                                    }
+                                ''')
+                            }
+                        }
+                    }
+    pipelineJob('pipeline/declarative/06 Stages') {
+                        definition {
+                            cps {
+                                script('''
+                                    pipeline {
+                                        agent any
+                                        stages {
+                                            stage('Build') {
+                                                steps {
+                                                    echo 'Building the project...'
+                                                }
+                                            }
+                                            stage('Test') {
+                                                steps {
+                                                    echo 'Running tests...'
+                                                }
+                                            }
+                                            stage('Deploy') {
+                                                steps {
+                                                    echo 'Deploying the application...'
+                                                }
+                                            }
+                                        }
+                                    }
+                                ''')
+                            }
+                        }
+                    }
+    pipelineJob('pipeline/declarative/07 Steps') {
+                        definition {
+                            cps {
+                                script('''
+                                    pipeline {
+                                        agent any
+                                        stages {
+                                            stage('Hello') {
+                                                steps {
+                                                    echo 'Step 1'
+                                                    echo 'Step 2'
+                                                    echo 'Step 3'
+                                                }
+                                            }
+                                        }
+                                    }
+                                ''')
+                            }
+                        }
+                    }
 }
 
