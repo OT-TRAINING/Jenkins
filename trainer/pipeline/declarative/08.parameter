@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: 'GREETING', defaultValue: 'Hello', description: 'Enter a greeting')
+        booleanParam(name: 'SAY_GOODBYE', defaultValue: false, description: 'Check to say goodbye')
+    }
+    stages {
+        stage('Hello') {
+            steps {
+                script {
+                    def message = params.SAY_GOODBYE ? 'Goodbye' : params.GREETING
+                    echo message
+                }
+            }
+        }
+    }
+}

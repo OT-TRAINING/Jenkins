@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+    environment {
+        MY_VARIABLE = 'Hello, Jenkins!'
+    }
+    stages {
+        stage('Hello') {
+            steps {
+                echo env.MY_VARIABLE
+            }
+        }
+    }
+}

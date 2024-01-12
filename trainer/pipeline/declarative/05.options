@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+    options {
+        timeout(time: 1, unit: 'HOURS')
+        disableConcurrentBuilds()
+    }
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello, world!'
+            }
+        }
+    }
+}
