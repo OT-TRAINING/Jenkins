@@ -1,0 +1,69 @@
+pipeline {
+    agent any
+    parameters {
+        booleanParam(name: 'skip_test', defaultValue: false, description: 'Tick Skip If You Want To Skip Various Tests')
+    }
+ 
+    stages {
+        stage('Checkout') {
+            steps {
+                echo "checkout scm" // Dummy steps for testing
+            }
+        }
+        
+        stage('Test') {
+            when { expression { params.skip_test != true } }
+            parallel {
+                stage('Code Stability Tests') {
+                    steps {
+                        echo 'Running code stability tests'
+                        // Dummy steps for testing
+                    }
+                }
+                stage('Code Quality Analysis Tests') {
+                    steps {
+                        echo 'Running code quality analysis tests'
+                        // Dummy steps for testing
+                    }
+                }
+                stage('Code Coverage Tests') {
+                    steps {
+                        echo 'Running code coverage tests'
+                        // Dummy steps for testing
+                    }
+                }
+                stage('Build') {
+                      steps {
+                        echo 'Running build commands'
+                        // Replace the following echo with your actual build commands
+                        echo 'mvn clean package'
+                // Add commands to build application
+            }
+        }
+            }
+        }
+        stage('Report Generation') {
+            steps {
+                echo 'Generating Report'
+                // Dummy steps for testing
+            }
+        }
+        stage('user input') {
+            input {
+                message 'Do you want to Archive the Artifact'
+                ok 'Yes'
+                submitter 'ritesh'
+            }
+            steps {
+                echo "End"
+                // Dummy steps for testing
+            }
+        }
+        stage('Artifact archieve') {
+            steps {
+                echo 'Archiving artifacts'
+                // Dummy steps for testing
+            }
+        }
+    }
+}
