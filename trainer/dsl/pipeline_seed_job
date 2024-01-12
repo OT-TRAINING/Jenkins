@@ -6,3 +6,7 @@ folder('pipeline/declarative') {
   	displayName('Declarative Pipeline Jobs')
     description('Folder for Declarative Pipeline Jobs')
 }
+folder('pipeline/scripted') {
+  	displayName('Scripted Pipeline Jobs')
+    description('Folder for Scripted Pipeline Jobs')
+}
