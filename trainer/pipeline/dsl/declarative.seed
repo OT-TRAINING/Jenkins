@@ -182,5 +182,45 @@ folder('pipeline/declarative') {
                             }
                         }
                     }
+    pipelineJob('pipeline/declarative/09 Input') {
+                        definition {
+                            cps {
+                                script('''
+                                    pipeline {
+                                        agent any
+                                        stages {
+                                            stage('Build') {
+                                                steps {
+                                                    echo 'Building the project...'
+                                                }
+                                            }
+
+                                            stage('Test') {
+                                                steps {
+                                                    echo 'Running tests...'
+                                                }
+                                            }
+
+                                            stage('Deploy') {
+                                                steps {
+                                                    echo 'Deploying...'
+                                                }
+                                                post {
+                                                    failure {
+                                                        echo 'Deployment failed!'
+                                                    }
+                                                }
+                                                input {
+                                                    message 'Do you want to proceed with deployment?'
+                                                    ok 'Deploy'
+                                                    submitter 'admin'
+                                                }
+                                            }
+                                        }
+                                    }
+                                ''')
+                            }
+                        }
+                    }
 }
 
