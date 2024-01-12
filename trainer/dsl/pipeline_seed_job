@@ -5,7 +5,27 @@ folder('pipeline') {
 folder('pipeline/declarative') {
   	displayName('Declarative Pipeline Jobs')
     description('Folder for Declarative Pipeline Jobs')
+
+    pipelineJob('pipeline/declarative/World') {
+                        definition {
+                            cps {
+                                script('''
+                                    pipeline {
+                                        agent any
+                                        stages {
+                                            stage('Hello World') {
+                                                steps {
+                                                    echo 'Hello, World!'
+                                                }
+                                            }
+                                        }
+                                    }
+                                ''')
+                            }
+                        }
+                    }
 }
+
 folder('pipeline/scripted') {
   	displayName('Scripted Pipeline Jobs')
     description('Folder for Scripted Pipeline Jobs')
