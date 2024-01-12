@@ -1,0 +1,5 @@
+folder('declarative') {
+    displayName('Declarative Pipeline Jobs')
+    description('Folder for Declarative Pipeline Jobs')
+}
+
