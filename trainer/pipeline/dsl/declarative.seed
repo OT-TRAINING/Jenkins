@@ -222,5 +222,31 @@ folder('pipeline/declarative') {
                             }
                         }
                     }
+    pipelineJob('pipeline/declarative/10 Post') {
+                        definition {
+                            cps {
+                                script('''
+                                    pipeline {
+                                        agent any
+                                        stages {
+                                            stage('Build') {
+                                                steps {
+                                                    echo 'Hello, world!'
+                                                }
+                                            }
+                                        }
+                                        post {
+                                            success {
+                                                echo 'Pipeline executed successfully!'
+                                            }
+                                            failure {
+                                                echo 'Pipeline failed!'
+                                            }
+                                        }
+                                    }
+                                ''')
+                            }
+                        }
+                    }
 }
 
