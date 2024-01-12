@@ -1,0 +1,26 @@
+node {
+    def publisherReport = false
+    def notification = true
+
+    stage('Code Checkout') {
+        git 'https://github.com/opstree/spring3hibernate.git'
+    }
+
+    stage('Code Build') {
+        echo "Building Code"
+    }
+
+    if (publisherReport) {
+        stage('Report Publishing') {
+            echo "Publishing report.html"
+            // Add your report publishing logic here
+        }
+    }
+
+    if (notification) {
+        stage('Notification') {
+            echo "Sending Slack notification"
+            // Add your notification logic here
+        }
+    }
+}
