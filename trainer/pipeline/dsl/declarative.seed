@@ -1,0 +1,90 @@
+folder('pipeline') {
+    displayName('Pipeline Jobs')
+    description('Folder for Declarative and Scripted Pipeline Jobs')
+}
+folder('pipeline/declarative') {
+  	displayName('Declarative Pipeline Jobs')
+    description('Folder for Declarative Pipeline Jobs')
+
+    pipelineJob('pipeline/declarative/01 Hello_Stage') {
+                        definition {
+                            cps {
+                                script('''
+                                    pipeline {
+                                        agent any
+                                        stages {
+                                            stage('Stage 1') {
+                                                steps {
+                                                    echo 'Hello, World!'
+                                                }
+                                            }
+                                        }
+                                    }
+                                ''')
+                            }
+                        }
+                    }
+    pipelineJob('pipeline/declarative/02 Agent') {
+                        definition {
+                            cps {
+                                script('''
+                                    pipeline {
+                                        agent any
+                                        stages {
+                                            stage('Hello From Agent') {
+                                                steps {
+                                                    echo 'Hello, From Mr. Agent'
+                                                }
+                                            }
+                                        }
+                                    }
+                                ''')
+                            }
+                        }
+                    }
+    pipelineJob('pipeline/declarative/03 Tools') {
+                        definition {
+                            cps {
+                                script('''
+                                    pipeline {
+                                        agent any
+                                        tools {
+                                            maven'maven-3.9.0'
+                                            jdk 'jdk'
+                                        }
+                                        stages {
+                                            stage('Build') {
+                                                steps {
+                                                    echo 'Building with Maven'
+                                                    sh 'mvn --version'
+                                                }
+                                            }
+                                        }
+                                    }
+                                ''')
+                            }
+                        }
+                    }
+    pipelineJob('pipeline/declarative/04 Environment') {
+                        definition {
+                            cps {
+                                script('''
+                                    pipeline {
+                                        agent any
+                                        environment {
+                                            MY_VARIABLE = 'Hello, Jenkins!'
+                                        }
+                                        stages {
+                                            stage('Build') {
+                                                steps {
+                                                    echo env.MY_VARIABLE
+                                                }
+                                            }
+                                        }
+                                    }
+                                ''')
+                            }
+                        }
+                    }
+}
+
