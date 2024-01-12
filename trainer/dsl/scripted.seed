@@ -1,0 +1,4 @@
+folder('pipeline/scripted') {
+  	displayName('Scripted Pipeline Jobs')
+    description('Folder for Scripted Pipeline Jobs')
+}

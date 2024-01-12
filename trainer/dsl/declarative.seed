@@ -6,7 +6,7 @@ folder('pipeline/declarative') {
   	displayName('Declarative Pipeline Jobs')
     description('Folder for Declarative Pipeline Jobs')
 
-    pipelineJob('pipeline/declarative/World') {
+    pipelineJob('pipeline/declarative/Hello World') {
                         definition {
                             cps {
                                 script('''
@@ -26,7 +26,3 @@ folder('pipeline/declarative') {
                     }
 }
 
-folder('pipeline/scripted') {
-  	displayName('Scripted Pipeline Jobs')
-    description('Folder for Scripted Pipeline Jobs')
-}
