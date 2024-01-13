@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+    parameters {
+        string(defaultValue: 'opstree', description: 'Provide a name for hello', name: 'Name')
+        string(defaultValue: '/var/lib/jenkins/secret.txt', description: 'Provide the path of the secret file', name: 'secretFilePath')
+    }
+
+    stages {
+        stage('Hello World') {
+            steps {
+                echo "Hello, World!"
+            }
+        }
+
+        stage('Parameter') {
+            steps {
+                echo "Hello, ${params.Name}"
+            }
+        }
+
+        stage('Print From Secret File') {
+            steps {
+                script {
+                    def secretFileContent = readFile(params.secretFilePath)
+                    echo "Content of the secret file: ${secretFileContent}"
+                }
+            }
+        }
+    }
+}
