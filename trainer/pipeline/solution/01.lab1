@@ -1,7 +1,10 @@
 pipeline {
     agent any
+    options {
+        timeout(time: 1, unit: 'MINUTES')
+    }
     parameters {
-        string(defaultValue: 'opstree', description: 'Provide a name for hello', name: 'Name')
+        string(defaultValue: 'ritesh', description: 'Provide a name for hello', name: 'Name')
         string(defaultValue: '/var/lib/jenkins/secret.txt', description: 'Provide the path of the secret file', name: 'secretFilePath')
     }
 
@@ -25,6 +28,40 @@ pipeline {
                     echo "Content of the secret file: ${secretFileContent}"
                 }
             }
+        }
+
+        stage('User Input') {
+            steps {
+                script {
+                    def userInput = input(message: "Do you want to proceed with the final stage?", submitter: 'user')
+                    if (!userInput) {
+                        echo "User chose not to proceed. Aborting the pipeline."
+                        return
+                    }
+                }
+            }
+        }
+
+        stage('Deploying') {
+            when {
+                expression { true } // Always execute this stage
+            }
+            steps {
+                echo "Deploying ..."
+                // Your deployment steps here
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline executed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+        aborted {
+            echo 'Pipeline aborted!'
         }
     }
 }
